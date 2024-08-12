@@ -6,13 +6,15 @@
     <title>Xolos Ramirez - Expertos en Xoloitzcuintle | Crianza y Amor Canino</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <style>
-        /* Same CSS as before, including the styles for #auth-section and #login-section */
         #auth-section {
             display: none; /* Hidden by default */
         }
         #login-section {
-            display: none; /* Hidden by default */
             margin: 20px 0;
+        }
+        #login-error {
+            color: red;
+            display: none;
         }
         .cta-button {
             display: inline-block;
@@ -21,6 +23,11 @@
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
+        }
+        .blog-post {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -31,7 +38,6 @@
             <li><a href="#sobre-nosotros"><i class="fas fa-users"></i> Sobre Nosotros</a></li>
             <li><a href="#galeria"><i class="fas fa-images"></i> Galería</a></li>
             <li><a href="#blog"><i class="fas fa-blog"></i> Blog</a></li>
-            <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
             <li><a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
         </ul>
     </nav>
@@ -59,44 +65,4 @@
     <div id="blog" class="container blog-section">
         <h2>Blog</h2>
         <div id="blog-posts">
-            <!-- Blog posts will be dynamically added here -->
-        </div>
-        <div id="auth-section">
-            <h3>Agregar Nuevo Artículo</h3>
-            <form id="add-post-form">
-                <input type="text" id="post-title" placeholder="Título del artículo" required><br><br>
-                <textarea id="post-content" rows="5" placeholder="Contenido del artículo" required></textarea><br><br>
-                <button type="submit" class="cta-button">Agregar Artículo</button>
-            </form>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Xolos Ramirez. Todos los derechos reservados.</p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const postsContainer = document.getElementById('blog-posts');
-            const addPostForm = document.getElementById('add-post-form');
-            const authSection = document.getElementById('auth-section');
-
-            // Check for login status
-            const loggedIn = sessionStorage.getItem('loggedIn') === 'true';
-            if (loggedIn) {
-                authSection.style.display = 'block';  // Show post creation form if logged in
-            } else {
-                authSection.style.display = 'none';  // Hide post creation form if not logged in
-            }
-
-            // Handle post submission
-            addPostForm.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const title = document.getElementById('post-title').value;
-                const content = document.getElementById('post-content').value;
-                
-                // Create a new blog post
-                const postElement = document.createElement('div');
-                postElement.classList.add('blog-post');
-                postElement.innerHTML =
-
+            <!-- Blog posts will be dynam
