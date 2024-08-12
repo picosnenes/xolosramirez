@@ -65,4 +65,88 @@
     <div id="blog" class="container blog-section">
         <h2>Blog</h2>
         <div id="blog-posts">
-            <!-- Blog posts will be dynam
+            <!-- Blog posts will be dynamically added here -->
+        </div>
+        <div id="auth-section">
+            <h3>Agregar Nuevo Artículo</h3>
+            <form id="add-post-form">
+                <input type="text" id="post-title" placeholder="Título del artículo" required><br><br>
+                <textarea id="post-content" rows="5" placeholder="Contenido del artículo" required></textarea><br><br>
+                <button type="submit" class="cta-button">Agregar Artículo</button>
+            </form>
+        </div>
+        <div id="login-section">
+            <h3>Iniciar Sesión</h3>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Usuario" required><br><br>
+                <input type="password" id="password" placeholder="Contraseña" required><br><br>
+                <button type="submit" class="cta-button">Iniciar Sesión</button>
+                <p id="login-error">Credenciales incorrectas</p>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Xolos Ramirez. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const postsContainer = document.getElementById('blog-posts');
+            const addPostForm = document.getElementById('add-post-form');
+            const loginForm = document.getElementById('login-form');
+            const loginSection = document.getElementById('login-section');
+            const authSection = document.getElementById('auth-section');
+            const loginError = document.getElementById('login-error');
+
+            // Credentials (for demonstration purposes; should be handled securely on a server)
+            const validUsername = 'xolosramirez';
+            const validPassword = 'micramagnum123+';
+
+            // Check for login status
+            const loggedIn = sessionStorage.getItem('loggedIn') === 'true';
+            if (loggedIn) {
+                loginSection.style.display = 'none';  // Hide login form
+                authSection.style.display = 'block';  // Show post creation form
+            } else {
+                loginSection.style.display = 'block';  // Show login form
+                authSection.style.display = 'none';  // Hide post creation form
+            }
+
+            // Handle login
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (username === validUsername && password === validPassword) {
+                    sessionStorage.setItem('loggedIn', 'true');
+                    loginSection.style.display = 'none';  // Hide login form
+                    authSection.style.display = 'block';  // Show post creation form
+                } else {
+                    loginError.style.display = 'block';  // Show error
+                }
+            });
+
+            // Handle post submission
+            addPostForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const title = document.getElementById('post-title').value;
+                const content = document.getElementById('post-content').value;
+                
+                // Create a new blog post
+                const postElement = document.createElement('div');
+                postElement.classList.add('blog-post');
+                postElement.innerHTML = `
+                    <h3>${title}</h3>
+                    <p>${content}</p>
+                `;
+                postsContainer.appendChild(postElement);
+                
+                // Clear the form
+                addPostForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
