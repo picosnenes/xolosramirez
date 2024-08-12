@@ -18,4 +18,223 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            scroll-behavior: smooth;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 2rem 1rem;
+            position: relative;
+        }
+        nav {
+            background-color: rgba(26, 26, 26, 0.8);
+            padding: 0.5rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+        .main-content {
+            background-color: #fff;
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+        .main-content:hover {
+            transform: translateY(-5px);
+        }
+        .blog-section {
+            background-color: #fff;
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .blog-section h2 {
+            margin-bottom: 20px;
+        }
+        .blog-post {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+        }
+        .blog-post:last-child {
+            border-bottom: none;
+        }
+        .blog-post h3 {
+            margin: 0;
+        }
+        .blog-post p {
+            margin: 10px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: var(--transition);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .cta-button:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        footer {
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        #login-section, #auth-section {
+            margin: 20px 0;
+        }
+        #login-section input, #auth-section input, #auth-section textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #login-section button, #auth-section button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #login-section button:hover, #auth-section button:hover {
+            background-color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <ul>
+            <li><a href="#inicio"><i class="fas fa-home"></i> Inicio</a></li>
+            <li><a href="#sobre-nosotros"><i class="fas fa-users"></i> Sobre Nosotros</a></li>
+            <li><a href="#galeria"><i class="fas fa-images"></i> Galería</a></li>
+            <li><a href="#blog"><i class="fas fa-blog"></i> Blog</a></li>
+            <li><a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Xolos Ramirez - Expertos en Xoloitzcuintle</h1>
+    </header>
+
+    <div id="inicio" class="container main-content">
+        <h2>Bienvenidos a Xolos Ramirez</h2>
+        <p>Expertos en la crianza y cuidado del Xoloitzcuintle. Aquí encontrarás toda la información necesaria para proporcionar el mejor cuidado a tu compañero canino.</p>
+        <a href="#blog" class="cta-button">Leer Blog</a>
+    </div>
+
+    <div id="sobre-nosotros" class="container main-content">
+        <h2>Sobre Nosotros</h2>
+        <p>Somos un equipo dedicado a la crianza y cuidado de los Xoloitzcuintles. Nuestra misión es ofrecerte toda la información y apoyo que necesites.</p>
+    </div>
+
+    <div id="galeria" class="container main-content">
+        <h2>Galería</h2>
+        <!-- Add gallery content here -->
+    </div>
+
+    <div id="blog" class="container blog-section">
+        <h2>Blog</h2>
+        <div id="blog-posts">
+            <!-- Blog posts will be dynamically added here -->
+        </div>
+        <div id="auth-section" class="hidden">
+            <h3>Agregar Nuevo Artículo</h3>
+            <form id="add-post-form">
+                <input type="text" id="post-title" placeholder="Título del artículo" required><br><br>
+                <textarea id="post-content" rows="5" placeholder="Contenido del artículo" required></textarea><br><br>
+                <button type="submit" class="cta-button">Agregar Artículo</button>
+            </form>
+        </div>
+        <div id="login-section">
+            <h3>Iniciar Sesión</h3>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Nombre de usuario" required><br><br>
+                <input type="password" id="password" placeholder="Contraseña" required><br><br>
+                <button type="submit" class="cta-button">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Xolos Ramirez. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+            const authSection = document.getElementById('auth-section');
+            const loginSection = document.getElementById('login-section');
+            const postsContainer = document.getElementById('blog-posts');
+            const addPostForm = document.getElementById('add-post-form');
+
+            // Private user credentials
+            const validUsername = 'xolosramirez';
+            const validPassword = 'micramagnum';
+
+            // Handle login
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value.trim();
+
+                if (username === validUsername && password === validPassword) {
+                    loginSection.classList.add('hidden');
+                    authSection.classList.remove('hidden');
+                } else {
+                    alert('Credenciales inválidas');
+                }
+            });
+
