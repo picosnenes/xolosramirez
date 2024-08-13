@@ -64,6 +64,17 @@
             width: 100%;
             bottom: 0;
         }
+        #header-articles {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        #header-articles h2 {
+            margin: 0;
+        }
+        #article-form {
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
@@ -80,6 +91,21 @@
     <header>
         <h1>Xolos Ramirez - Expertos en Xoloitzcuintle</h1>
     </header>
+
+    <div id="header-articles" class="container">
+        <h2>Artículos Destacados</h2>
+        <div id="featured-articles">
+            <!-- Featured articles will be dynamically added here -->
+        </div>
+        <div id="article-form">
+            <h3>Agregar Nuevo Artículo</h3>
+            <form id="add-article-form">
+                <input type="text" id="article-title" placeholder="Título del artículo" required><br><br>
+                <textarea id="article-content" rows="5" placeholder="Contenido del artículo" required></textarea><br><br>
+                <button type="submit" class="cta-button">Agregar Artículo</button>
+            </form>
+        </div>
+    </div>
 
     <div id="inicio" class="container main-content">
         <h2>Bienvenidos a Xolos Ramirez</h2>
@@ -127,8 +153,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const postsContainer = document.getElementById('blog-posts');
+            const blogPostsContainer = document.getElementById('blog-posts');
+            const featuredArticlesContainer = document.getElementById('featured-articles');
             const addPostForm = document.getElementById('add-post-form');
+            const addArticleForm = document.getElementById('add-article-form');
             const loginForm = document.getElementById('login-form');
             const loginSection = document.getElementById('login-section');
             const authSection = document.getElementById('auth-section');
@@ -141,7 +169,7 @@
             // Load saved posts from localStorage
             const loadPosts = () => {
                 const savedPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-                postsContainer.innerHTML = ''; // Clear existing posts
+                blogPostsContainer.innerHTML = ''; // Clear existing posts
                 savedPosts.forEach(post => {
                     const postElement = document.createElement('div');
                     postElement.classList.add('blog-post');
@@ -149,7 +177,22 @@
                         <h3>${post.title}</h3>
                         <p>${post.content}</p>
                     `;
-                    postsContainer.appendChild(postElement);
+                    blogPostsContainer.appendChild(postElement);
+                });
+            };
+
+            // Load saved featured articles from localStorage
+            const loadFeaturedArticles = () => {
+                const savedArticles = JSON.parse(localStorage.getItem('featuredArticles')) || [];
+                featuredArticlesContainer.innerHTML = ''; // Clear existing articles
+                savedArticles.forEach(article => {
+                    const articleElement = document.createElement('div');
+                    articleElement.classList.add('blog-post');
+                    articleElement.innerHTML = `
+                        <h3>${article.title}</h3>
+                        <p>${article.content}</p>
+                    `;
+                    featuredArticlesContainer.appendChild(articleElement);
                 });
             };
 
@@ -172,7 +215,4 @@
                 if (username === validUsername && password === validPassword) {
                     sessionStorage.setItem('loggedIn', 'true');
                     loginSection.style.display = 'none';  // Hide login form
-                    authSection.style.display = 'block';  // Show post creation form
-                    loginError.style.display = 'none';    // Hide error message
-                } else {
-                    loginError.style.display = 'block
+                    authSection.style.display =
