@@ -75,6 +75,9 @@
         #article-form {
             margin: 20px 0;
         }
+        #blog {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -128,23 +131,6 @@
         <div id="blog-posts">
             <!-- Blog posts will be dynamically added here -->
         </div>
-        <div id="auth-section">
-            <h3>Agregar Nuevo Artículo</h3>
-            <form id="add-post-form">
-                <input type="text" id="post-title" placeholder="Título del artículo" required><br><br>
-                <textarea id="post-content" rows="5" placeholder="Contenido del artículo" required></textarea><br><br>
-                <button type="submit" class="cta-button">Agregar Artículo</button>
-            </form>
-        </div>
-        <div id="login-section">
-            <h3>Iniciar Sesión</h3>
-            <form id="login-form">
-                <input type="text" id="username" placeholder="Usuario" required><br><br>
-                <input type="password" id="password" placeholder="Contraseña" required><br><br>
-                <button type="submit" class="cta-button">Iniciar Sesión</button>
-                <p id="login-error">Credenciales incorrectas</p>
-            </form>
-        </div>
     </div>
 
     <footer>
@@ -166,8 +152,8 @@
             const validUsername = 'xolosramirez';
             const validPassword = 'micramagnum123+';
 
-            // Load saved posts from localStorage
-            const loadPosts = () => {
+            // Load saved blog posts from localStorage
+            const loadBlogPosts = () => {
                 const savedPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
                 blogPostsContainer.innerHTML = ''; // Clear existing posts
                 savedPosts.forEach(post => {
@@ -215,4 +201,29 @@
                 if (username === validUsername && password === validPassword) {
                     sessionStorage.setItem('loggedIn', 'true');
                     loginSection.style.display = 'none';  // Hide login form
-                    authSection.style.display =
+                    authSection.style.display = 'block';  // Show post creation form
+                    loginError.style.display = 'none';    // Hide error message
+                } else {
+                    loginError.style.display = 'block';  // Show error
+                }
+            });
+
+            // Handle article submission
+            addArticleForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const title = document.getElementById('article-title').value;
+                const content = document.getElementById('article-content').value;
+                
+                // Create a new featured article
+                const articleElement = document.createElement('div');
+                articleElement.classList.add('blog-post');
+                articleElement.innerHTML = `
+                    <h3>${title}</h3>
+                    <p>${content}</p>
+                `;
+                featuredArticlesContainer.appendChild(articleElement);
+
+                // Save article to localStorage
+                const savedArticles = JSON.parse(localStorage.getItem('featuredArticles')) || [];
+                savedArticles.push({ title, content });
+                localStorage.setItem('
