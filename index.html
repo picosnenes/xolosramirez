@@ -1,58 +1,54 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sitio Web de Xolos Ramírez</title>
+    <title>Xolos Ramirez - Home</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Sitio Web de Xolos Ramírez</h1>
-            <nav>
-                <ul id="nav-menu">
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Categorías</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contacto</a></li>
-                </ul>
-            </nav>
-            <div class="login" id="login-container">
-                <button id="login-button">Iniciar sesión</button>
-            </div>
-            <div class="admin-section" id="admin-section" style="display: none;">
-                <h2>Administración</h2>
-                <button id="edit-nav">Editar Navegación</button>
-                <button id="logout-button">Cerrar sesión</button>
-            </div>
+            <h1>Xolos Ramirez</h1>
+            <p>Criadero de Xoloitzcuintli</p>
         </div>
     </header>
 
-    <main>
-        <section class="login-form" id="login-form" style="display: none;">
-            <h2>Iniciar sesión</h2>
-            <form id="admin-login">
-                <label for="username">Usuario:</label>
-                <input type="text" id="username" name="username" required>
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
-                <button type="submit">Entrar</button>
-                <p id="login-error" style="color: red; display: none;">Usuario o contraseña incorrectos.</p>
-            </form>
-        </section>
+    <nav>
+        <div class="container">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
 
-        <section class="blog-posts">
-            <article>
-                <h2>Título del Artículo</h2>
-                <p class="date">12 de agosto de 2024</p>
-                <figure>
-                    <img src="ruta-a-tu-imagen.jpg" alt="Descripción de la imagen">
-                    <figcaption>Descripción de la imagen</figcaption>
-                </figure>
-                <p class="excerpt">Este es un resumen del artículo. Aquí puedes poner una introducción o un extracto interesante para atraer a los lectores...</p>
-                <a href="#" class="read-more">Leer más</a>
-            </article>
+    <main>
+        <div class="container">
+            <h2>Welcome to Xolos Ramirez</h2>
+            <div class="login">
+                <h3>Login</h3>
+                <form action="api/login" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+            <p>Welcome to Xolos Ramirez! Discover information about our Xoloitzcuintli dogs and our breeding services.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Xolos Ramirez. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
            
 
 
