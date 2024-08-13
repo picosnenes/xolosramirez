@@ -1,52 +1,51 @@
-import Head from 'next/head';
 import Link from 'next/link';
-import styles from '../styles/Home.module.css';
 
 export default function Blog({ posts }) {
     return (
-        <div className={styles.container}>
-            <Head>
-                <title>Xolos Ramirez - Blog</title>
-                <meta name="description" content="Blog de Xolos Ramirez" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-
-            <header className={styles.header}>
+        <div>
+            <header>
                 <h1>Xolos Ramirez</h1>
                 <p>Criadero de Xoloitzcuintli</p>
             </header>
 
-            <nav className={styles.nav}>
-                <a href="/">Inicio</a>
-                <a href="/about">Sobre Nosotros</a>
-                <a href="/gallery">Galería</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/gallery">Gallery</a>
                 <a href="/blog">Blog</a>
-                <a href="/contact">Contacto</a>
+                <a href="/contact">Contact</a>
             </nav>
 
-            <main className={styles.main}>
+            <main>
                 <h2>Blog</h2>
-                <div>
+                <div className="blog">
                     {posts.map(post => (
-                        <div key={post.id} className={styles.blogArticle}>
+                        <article key={post.id}>
                             <h3>
-                                <Link href={`/post/${post.id}`}>
-                                    <a>{post.title}</a>
-                                </Link>
+                                <a href={`/post/${post.id}`} target="_blank" rel="noopener noreferrer">
+                                    {post.title}
+                                </a>
                             </h3>
-                            <p>{post.excerpt}</p>
-                        </div>
+                            <p>{post.summary}</p>
+                        </article>
                     ))}
                 </div>
             </main>
+
+            <footer>
+                <p>&copy; 2024 Xolos Ramirez. All rights reserved.</p>
+            </footer>
         </div>
     );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const posts = [
-        { id: '1', title: 'Título del Artículo 1', excerpt: 'Resumen del artículo 1.' },
-        { id: '2', title: 'Título del Artículo 2', excerpt: 'Resumen del artículo 2.' }
+        { id: 1, title: 'Blog Post 1', summary: 'Summary of blog post 1.' },
+        { id: 2, title: 'Blog Post 2', summary: 'Summary of blog post 2.' },
     ];
+
     return { props: { posts } };
 }
+
+
