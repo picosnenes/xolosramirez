@@ -47,8 +47,11 @@
             <h1>Blog</h1>
             <div id="blog-posts"></div>
             <div id="edit-blog-section" class="hidden">
-                <textarea id="blog-content" placeholder="Escribe tu artículo aquí..."></textarea>
-                <button onclick="publishBlog()">Publicar Artículo</button>
+                <div class="blog-editor">
+                    <textarea id="blog-content" placeholder="Escribe tu artículo aquí..."></textarea>
+                    <input type="file" id="image-upload" accept="image/*">
+                    <button onclick="publishBlog()">Publicar Artículo</button>
+                </div>
             </div>
         </div>
 
@@ -62,5 +65,7 @@
 </body>
 </html>
 
+        
+            
 
 
