@@ -1,62 +1,46 @@
-// Función para publicar contenido en el blog
-function publishBlog() {
-    const content = document.getElementById('blog-content').value;
-    const imageFile = document.getElementById('image-upload').files[0];
-    const reader = new FileReader();
+document.addEventListener('DOMContentLoaded', function() {
+    const username = 'xolosramirez';
+    const password = 'micramagnum';
 
-    if (content.trim() === '' && !imageFile) {
-        alert('El contenido del artículo no puede estar vacío y debes seleccionar una imagen.');
-        return;
-    }
+    const loginButton = document.getElementById('login-button');
+    const loginForm = document.getElementById('login-form');
+    const adminSection = document.getElementById('admin-section');
+    const logoutButton = document.getElementById('logout-button');
+    const editNavButton = document.getElementById('edit-nav');
+    const loginError = document.getElementById('login-error');
 
-    let blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-
-    if (imageFile) {
-        reader.onload = function (e) {
-            const post = {
-                text: content,
-                image: e.target.result
-            };
-            blogPosts.push(post);
-            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
-            document.getElementById('blog-content').value = '';
-            document.getElementById('image-upload').value = '';
-            loadBlogPosts();
-        };
-        reader.readAsDataURL(imageFile);
-    } else {
-        const post = {
-            text: content,
-            image: null
-        };
-        blogPosts.push(post);
-        localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
-        document.getElementById('blog-content').value = '';
-        loadBlogPosts();
-    }
-}
-
-// Función para cargar los artículos del blog desde localStorage
-function loadBlogPosts() {
-    const blogPostsContainer = document.getElementById('blog-posts');
-    blogPostsContainer.innerHTML = '';
-    const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-    blogPosts.forEach(post => {
-        const postElement = document.createElement('div');
-        postElement.classList.add('blog-post');
-        postElement.innerHTML = `
-            ${post.text ? `<p>${post.text}</p>` : ''}
-            ${post.image ? `<img src="${post.image}" alt="Imagen del artículo">` : ''}
-        `;
-        blogPostsContainer.appendChild(postElement);
+    loginButton.addEventListener('click', function() {
+        loginForm.style.display = 'block';
     });
-}
 
-// Ocultar las secciones de edición al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-    const isLoggedIn = sessionStorage.getItem('loggedIn') === 'true';
-    document.getElementById('post-section').classList.toggle('hidden', !isLoggedIn);
-    document.getElementById('edit-blog-section').classList.toggle('hidden', !isLoggedIn);
-    loadBlogPosts(); // Cargar los artículos al iniciar la página
+    logoutButton.addEventListener('click', function() {
+        loginForm.style.display = 'none';
+        adminSection.style.display = 'none';
+        loginButton.style.display = 'block';
+        document.getElementById('nav-menu').style.display = 'flex';
+    });
+
+    document.getElementById('admin-login').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const inputUsername = document.getElementById('username').value;
+        const inputPassword = document.getElementById('password').value;
+
+        if (inputUsername === username && inputPassword === password) {
+            loginForm.style.display = 'none';
+            adminSection.style.display = 'block';
+            loginButton.style.display = 'none';
+            document.getElementById('nav-menu').style.display = 'none';
+        } else {
+            loginError.style.display = 'block';
+        }
+    });
+
+    editNavButton.addEventListener('click', function() {
+        const newNav = prompt('Introduce las nuevas pestañas del menú, separadas por comas:');
+        if (newNav) {
+            const navItems = newNav.split(',').map(item => `<li><a href="#">${item.trim()}</a></li>`).join('');
+            document.getElementById('nav-menu').innerHTML = navItems;
+        }
+    });
 });
 
