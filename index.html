@@ -138,6 +138,21 @@
             const validUsername = 'xolosramirez';
             const validPassword = 'micramagnum123+';
 
+            // Load saved posts from localStorage
+            const loadPosts = () => {
+                const savedPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+                postsContainer.innerHTML = ''; // Clear existing posts
+                savedPosts.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('blog-post');
+                    postElement.innerHTML = `
+                        <h3>${post.title}</h3>
+                        <p>${post.content}</p>
+                    `;
+                    postsContainer.appendChild(postElement);
+                });
+            };
+
             // Check for login status
             const loggedIn = sessionStorage.getItem('loggedIn') === 'true';
             if (loggedIn) {
@@ -160,29 +175,4 @@
                     authSection.style.display = 'block';  // Show post creation form
                     loginError.style.display = 'none';    // Hide error message
                 } else {
-                    loginError.style.display = 'block';  // Show error
-                }
-            });
-
-            // Handle post submission
-            addPostForm.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const title = document.getElementById('post-title').value;
-                const content = document.getElementById('post-content').value;
-                
-                // Create a new blog post
-                const postElement = document.createElement('div');
-                postElement.classList.add('blog-post');
-                postElement.innerHTML = `
-                    <h3>${title}</h3>
-                    <p>${content}</p>
-                `;
-                postsContainer.appendChild(postElement);
-                
-                // Clear the form
-                addPostForm.reset();
-            });
-        });
-    </script>
-</body>
-</html>
+                    loginError.style.display = 'block
