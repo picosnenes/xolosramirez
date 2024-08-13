@@ -3,69 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Sitio Web</title>
+    <title>Blog de Xolos Ramírez</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="container">
-        <!-- Pestañas -->
+    <header>
+        <h1>Blog de Xolos Ramírez</h1>
         <nav>
-            <button onclick="showTab('inicio')">Inicio</button>
-            <button onclick="showTab('sobre')">Sobre Nosotros</button>
-            <button onclick="showTab('galeria')">Galería</button>
-            <button onclick="showTab('blog')">Blog</button>
-            <button onclick="showTab('contacto')">Contacto</button>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Categorías</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
         </nav>
+    </header>
 
-        <!-- Contenido -->
-        <div id="inicio" class="tab-content">
-            <h1>Inicio</h1>
-            <div id="post-section" class="hidden">
-                <textarea id="post-content" placeholder="Escribe tu publicación aquí..."></textarea>
-                <button onclick="postContent()">Publicar</button>
-            </div>
-            <div id="login-section">
-                <input type="text" id="username" placeholder="Usuario">
-                <input type="password" id="password" placeholder="Contraseña">
-                <button onclick="login()">Iniciar Sesión</button>
-            </div>
-            <div id="posts"></div>
-        </div>
+    <main>
+        <section class="blog-posts">
+            <article>
+                <h2>Título del Artículo</h2>
+                <p class="date">12 de agosto de 2024</p>
+                <p class="excerpt">Este es un resumen del artículo. Aquí puedes poner una introducción o un extracto interesante para atraer a los lectores...</p>
+                <a href="#" class="read-more">Leer más</a>
+            </article>
+            <!-- Más artículos aquí -->
+        </section>
+    </main>
 
-        <div id="sobre" class="tab-content hidden">
-            <h1>Sobre Nosotros</h1>
-            <p>Información sobre nosotros...</p>
-        </div>
-
-        <div id="galeria" class="tab-content hidden">
-            <h1>Galería</h1>
-            <input type="file" id="upload" multiple>
-            <div id="gallery"></div>
-        </div>
-
-        <div id="blog" class="tab-content hidden">
-            <h1>Blog</h1>
-            <div id="blog-posts"></div>
-            <div id="edit-blog-section" class="hidden">
-                <div class="blog-editor">
-                    <textarea id="blog-content" placeholder="Escribe tu artículo aquí..."></textarea>
-                    <input type="file" id="image-upload" accept="image/*">
-                    <button onclick="publishBlog()">Publicar Artículo</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="contacto" class="tab-content hidden">
-            <h1>Contacto</h1>
-            <a href="https://wa.me/1234567890" target="_blank">Contacta con nosotros por WhatsApp</a>
-            <p>Envía un correo a <a href="mailto:contacto@miweb.com">contacto@miweb.com</a></p>
-        </div>
-    </div>
-    <script src="scripts.js"></script>
+    <footer>
+        <p>&copy; 2024 Blog de Xolos Ramírez</p>
+    </footer>
 </body>
 </html>
 
+
         
-            
-
-
