@@ -1,59 +1,25 @@
-/* styles.css */
-
-body {
-    font-family: Arial, sans-serif;
-}
-
-#container {
-    width: 80%;
-    margin: auto;
-}
-
-nav {
-    background: #333;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-around;
-}
-
-nav button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-nav button:hover {
-    text-decoration: underline;
-}
-
-.tab-content {
-    display: none;
-}
-
+/* Estilo para las pestañas ocultas */
 .hidden {
     display: none;
 }
 
-textarea {
-    width: 100%;
-    height: 100px;
+/* Estilo básico para el contenido de las pestañas */
+.tab-content {
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
 }
 
-#gallery {
-    overflow: auto;
-    white-space: nowrap;
-}
-
-#gallery img {
-    height: 200px;
-    margin-right: 10px;
+/* Estilo para los botones de navegación */
+nav button {
+    margin: 5px;
+    padding: 10px;
     cursor: pointer;
 }
 
-input[type="file"] {
-    display: block;
-    margin: 20px 0;
+/* Estilo para los botones de navegación cuando están activos */
+nav button.active {
+    background-color: #007bff;
+    color: white;
 }
+
