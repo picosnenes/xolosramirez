@@ -1,4 +1,3 @@
-
 // Variables para almacenamiento de credenciales
 const USERNAME = 'xolosramirez';
 const PASSWORD = 'micramagnum';
@@ -13,6 +12,7 @@ function showTab(tabId) {
     if (tabId === 'blog') {
         const isLoggedIn = sessionStorage.getItem('loggedIn') === 'true';
         document.getElementById('edit-blog-section').classList.toggle('hidden', !isLoggedIn);
+        loadBlogPosts(); // Cargar los artículos del blog al mostrar la pestaña
     }
 }
 
@@ -35,16 +35,28 @@ function login() {
 function publishBlog() {
     const content = document.getElementById('blog-content').value;
     if (content.trim() !== '') {
-        const blogPosts = document.getElementById('blog-posts');
-        const newPost = document.createElement('div');
-        newPost.classList.add('blog-post');
-        newPost.innerHTML = `<p>${content}</p>`;
-        blogPosts.appendChild(newPost);
+        let blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+        blogPosts.push(content);
+        localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
         document.getElementById('blog-content').value = '';
+        loadBlogPosts(); // Recargar los artículos después de publicar
         alert('Artículo publicado');
     } else {
         alert('El contenido del artículo no puede estar vacío');
     }
+}
+
+// Función para cargar los artículos del blog desde localStorage
+function loadBlogPosts() {
+    const blogPostsContainer = document.getElementById('blog-posts');
+    blogPostsContainer.innerHTML = '';
+    const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+    blogPosts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.classList.add('blog-post');
+        postElement.innerHTML = `<p>${post}</p>`;
+        blogPostsContainer.appendChild(postElement);
+    });
 }
 
 // Ocultar las secciones de edición al cargar la página
