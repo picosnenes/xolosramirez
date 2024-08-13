@@ -47,17 +47,39 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-.login a {
+.login button, .admin-section button {
+    background-color: #007BFF;
     color: #fff;
-    text-decoration: none;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
 }
 
-.login a:hover {
-    text-decoration: underline;
+.login button:hover, .admin-section button:hover {
+    background-color: #0056b3;
 }
 
-main {
+.login-form {
+    max-width: 400px;
+    margin: 20px auto;
     padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .blog-posts {
@@ -86,40 +108,7 @@ figure {
     margin: 10px 0;
 }
 
-figure img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-
-figcaption {
-    font-size: 0.9em;
-    color: #666;
-    margin-top: 5px;
-}
-
-.excerpt {
-    margin: 15px 0;
-}
-
-.read-more {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-.read-more:hover {
-    text-decoration: underline;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
+figure img
 
 
 
