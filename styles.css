@@ -1,25 +1,40 @@
-/* Estilo para las pestañas ocultas */
-.hidden {
-    display: none;
+/* Estilo para la sección del Blog y editor */
+#blog {
+    padding: 20px;
 }
 
-/* Estilo básico para el contenido de las pestañas */
-.tab-content {
-    padding: 20px;
-    border: 1px solid #ddd;
+.blog-editor {
+    margin-top: 20px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    margin-bottom: 10px;
+}
+
+button {
+    display: block;
     margin-top: 10px;
 }
 
-/* Estilo para los botones de navegación */
-nav button {
-    margin: 5px;
-    padding: 10px;
-    cursor: pointer;
+#blog-posts {
+    margin-top: 20px;
 }
 
-/* Estilo para los botones de navegación cuando están activos */
-nav button.active {
-    background-color: #007bff;
-    color: white;
+.blog-post {
+    margin-bottom: 20px;
 }
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+}
+
 
