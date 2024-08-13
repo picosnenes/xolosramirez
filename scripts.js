@@ -1,48 +1,38 @@
-// Variables para almacenamiento de credenciales
-const USERNAME = 'xolosramirez';
-const PASSWORD = 'micramagnum';
-
-// Función para mostrar las pestañas
-function showTab(tabId) {
-    const tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(tab => tab.classList.add('hidden'));
-    document.getElementById(tabId).classList.remove('hidden');
-    
-    // Mostrar sección de edición si es la pestaña del blog
-    if (tabId === 'blog') {
-        const isLoggedIn = sessionStorage.getItem('loggedIn') === 'true';
-        document.getElementById('edit-blog-section').classList.toggle('hidden', !isLoggedIn);
-        loadBlogPosts(); // Cargar los artículos del blog al mostrar la pestaña
-    }
-}
-
-// Función para iniciar sesión
-function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    
-    if (username === USERNAME && password === PASSWORD) {
-        sessionStorage.setItem('loggedIn', 'true');
-        document.getElementById('post-section').classList.remove('hidden');
-        document.getElementById('edit-blog-section').classList.remove('hidden');
-        alert('Inicio de sesión exitoso');
-    } else {
-        alert('Usuario o contraseña incorrectos');
-    }
-}
-
 // Función para publicar contenido en el blog
 function publishBlog() {
     const content = document.getElementById('blog-content').value;
-    if (content.trim() !== '') {
-        let blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-        blogPosts.push(content);
+    const imageFile = document.getElementById('image-upload').files[0];
+    const reader = new FileReader();
+
+    if (content.trim() === '' && !imageFile) {
+        alert('El contenido del artículo no puede estar vacío y debes seleccionar una imagen.');
+        return;
+    }
+
+    let blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+
+    if (imageFile) {
+        reader.onload = function (e) {
+            const post = {
+                text: content,
+                image: e.target.result
+            };
+            blogPosts.push(post);
+            localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+            document.getElementById('blog-content').value = '';
+            document.getElementById('image-upload').value = '';
+            loadBlogPosts();
+        };
+        reader.readAsDataURL(imageFile);
+    } else {
+        const post = {
+            text: content,
+            image: null
+        };
+        blogPosts.push(post);
         localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
         document.getElementById('blog-content').value = '';
-        loadBlogPosts(); // Recargar los artículos después de publicar
-        alert('Artículo publicado');
-    } else {
-        alert('El contenido del artículo no puede estar vacío');
+        loadBlogPosts();
     }
 }
 
@@ -54,7 +44,10 @@ function loadBlogPosts() {
     blogPosts.forEach(post => {
         const postElement = document.createElement('div');
         postElement.classList.add('blog-post');
-        postElement.innerHTML = `<p>${post}</p>`;
+        postElement.innerHTML = `
+            ${post.text ? `<p>${post.text}</p>` : ''}
+            ${post.image ? `<img src="${post.image}" alt="Imagen del artículo">` : ''}
+        `;
         blogPostsContainer.appendChild(postElement);
     });
 }
@@ -64,4 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const isLoggedIn = sessionStorage.getItem('loggedIn') === 'true';
     document.getElementById('post-section').classList.toggle('hidden', !isLoggedIn);
     document.getElementById('edit-blog-section').classList.toggle('hidden', !isLoggedIn);
+    loadBlogPosts(); // Cargar los artículos al iniciar la página
 });
+
