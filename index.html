@@ -3,215 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xolos Ramirez - Expertos en Xoloitzcuintle</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            background-color: #333;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 15px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            display: inline-block;
-        }
-        nav ul li a:hover {
-            background-color: #575757;
-        }
-        .container {
-            padding: 20px;
-        }
-        .cta-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .blog-post, .gallery-photo {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-        #login-error {
-            color: red;
-            display: none;
-        }
-        #auth-section, #login-section {
-            margin: 20px 0;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-        #header-articles, #gallery {
-            background-color: #f8f9fa;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        #header-articles h2, #gallery h2 {
-            margin: 0;
-        }
-        #article-form, #contact-form {
-            margin: 20px 0;
-        }
-        .gallery-photo img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
+    <title>Mi Sitio Web</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav id="navbar">
-        <ul>
-            <li><a href="#inicio"><i class="fas fa-home"></i> Inicio</a></li>
-            <li><a href="#sobre-nosotros"><i class="fas fa-users"></i> Sobre Nosotros</a></li>
-            <li><a href="#galeria"><i class="fas fa-images"></i> Galería</a></li>
-            <li><a href="#blog"><i class="fas fa-blog"></i> Blog</a></li>
-            <li><a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
-            <li><a href="#login"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
-        </ul>
-    </nav>
+    <div id="container">
+        <!-- Pestañas -->
+        <nav>
+            <button onclick="showTab('inicio')">Inicio</button>
+            <button onclick="showTab('sobre')">Sobre Nosotros</button>
+            <button onclick="showTab('galeria')">Galería</button>
+            <button onclick="showTab('blog')">Blog</button>
+            <button onclick="showTab('contacto')">Contacto</button>
+        </nav>
 
-    <header>
-        <h1>Xolos Ramirez - Expertos en Xoloitzcuintle</h1>
-    </header>
-
-    <div id="inicio" class="container main-content">
-        <h2>Bienvenidos a Xolos Ramirez</h2>
-        <p>Expertos en la crianza y cuidado del Xoloitzcuintle. Aquí encontrarás toda la información necesaria para proporcionar el mejor cuidado a tu compañero canino.</p>
-        <a href="#blog" class="cta-button">Leer Blog</a>
-    </div>
-
-    <div id="sobre-nosotros" class="container main-content">
-        <h2>Sobre Nosotros</h2>
-        <div id="about-us">
-            <!-- Content to be filled by admin -->
+        <!-- Contenido -->
+        <div id="inicio" class="tab-content">
+            <h1>Inicio</h1>
+            <div id="post-section" class="hidden">
+                <textarea id="post-content" placeholder="Escribe tu publicación aquí..."></textarea>
+                <button onclick="postContent()">Publicar</button>
+            </div>
+            <div id="login-section">
+                <input type="text" id="username" placeholder="Usuario">
+                <input type="password" id="password" placeholder="Contraseña">
+                <button onclick="login()">Iniciar Sesión</button>
+            </div>
+            <div id="posts"></div>
         </div>
-        <h3>Editar Sobre Nosotros</h3>
-        <form id="about-form">
-            <textarea id="about-content" rows="5" placeholder="Escribe aquí sobre nosotros..." required></textarea><br><br>
-            <button type="submit" class="cta-button">Actualizar Información</button>
-        </form>
-    </div>
 
-    <div id="galeria" class="container main-content">
-        <h2>Galería</h2>
-        <div id="gallery">
-            <!-- Gallery photos will be dynamically added here -->
+        <div id="sobre" class="tab-content hidden">
+            <h1>Sobre Nosotros</h1>
+            <p>Información sobre nosotros...</p>
         </div>
-        <h3>Agregar Nueva Fotografía</h3>
-        <form id="gallery-form">
-            <input type="text" id="photo-title" placeholder="Título de la fotografía" required><br><br>
-            <input type="url" id="photo-url" placeholder="URL de la fotografía" required><br><br>
-            <button type="submit" class="cta-button">Agregar Fotografía</button>
-        </form>
-    </div>
 
-    <div id="blog" class="container main-content">
-        <h2>Blog</h2>
-        <div id="blog-posts">
-            <!-- Blog posts will be dynamically added here -->
+        <div id="galeria" class="tab-content hidden">
+            <h1>Galería</h1>
+            <input type="file" id="upload" multiple>
+            <div id="gallery"></div>
         </div>
-        <h3>Agregar Nuevo Artículo</h3>
-        <form id="add-article-form">
-            <input type="text" id="article-title" placeholder="Título del artículo" required><br><br>
-            <textarea id="article-content" rows="5" placeholder="Contenido del artículo" required></textarea><br><br>
-            <button type="submit" class="cta-button">Agregar Artículo</button>
-        </form>
+
+        <div id="blog" class="tab-content hidden">
+            <h1>Blog</h1>
+            <div id="blog-posts"></div>
+        </div>
+
+        <div id="contacto" class="tab-content hidden">
+            <h1>Contacto</h1>
+            <a href="https://wa.me/1234567890" target="_blank">Contacta con nosotros por WhatsApp</a>
+            <p>Envía un correo a <a href="mailto:contacto@miweb.com">contacto@miweb.com</a></p>
+        </div>
     </div>
-
-    <div id="contacto" class="container main-content">
-        <h2>Contacto</h2>
-        <form id="contact-form">
-            <input type="email" id="contact-email" placeholder="Tu correo electrónico" required><br><br>
-            <textarea id="contact-message" rows="5" placeholder="Tu mensaje" required></textarea><br><br>
-            <button type="submit" class="cta-button">Enviar Mensaje</button>
-        </form>
-    </div>
-
-    <div id="login" class="container main-content">
-        <h2>Iniciar Sesión</h2>
-        <form id="login-form">
-            <input type="text" id="username" placeholder="Usuario" required><br><br>
-            <input type="password" id="password" placeholder="Contraseña" required><br><br>
-            <button type="submit" class="cta-button">Iniciar Sesión</button>
-            <p id="login-error">Credenciales incorrectas</p>
-        </form>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Xolos Ramirez. Todos los derechos reservados.</p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const blogPostsContainer = document.getElementById('blog-posts');
-            const galleryContainer = document.getElementById('gallery');
-            const aboutUsContainer = document.getElementById('about-us');
-            const addArticleForm = document.getElementById('add-article-form');
-            const galleryForm = document.getElementById('gallery-form');
-            const aboutForm = document.getElementById('about-form');
-            const contactForm = document.getElementById('contact-form');
-            const loginForm = document.getElementById('login-form');
-            const loginError = document.getElementById('login-error');
-
-            // Credentials (for demonstration purposes; should be handled securely on a server)
-            const validUsername = 'xolosramirez';
-            const validPassword = 'micramagnum123+';
-
-            // Load saved blog posts from localStorage
-            const loadBlogPosts = () => {
-                const savedPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-                blogPostsContainer.innerHTML = ''; // Clear existing posts
-                savedPosts.forEach(post => {
-                    const postElement = document.createElement('div');
-                    postElement.classList.add('blog-post');
-                    postElement.innerHTML = `
-                        <h3>${post.title}</h3>
-                        <p>${post.content}</p>
-                    `;
-                    blogPostsContainer.appendChild(postElement);
-                });
-            };
-
-            // Load saved gallery photos from localStorage
-            const loadGalleryPhotos = () => {
-                const savedPhotos = JSON.parse(localStorage.getItem('galleryPhotos')) || [];
-                galleryContainer.innerHTML = ''; // Clear existing photos
-                savedPhotos.forEach(photo => {
-                    const photoElement = document.createElement('div');
-                    photoElement.classList.add('gallery-photo');
-                    photoElement.innerHTML = `
-                        <h4>${photo.title}</h4>
-                        <img src="${photo.url}" alt="${photo.title}">
-                    `;
-                    galleryContainer.appendChild(photoElement);
-                });
-            };
-
-            // Load saved about us content from localStorage
-            const loadAboutUsContent = () => {
-                const savedContent = localStorage.getItem('aboutUsContent') || 'Escribe aquí sobre nosotros...';
-                aboutUsContainer.innerHTML = `<p>${savedContent}</p>`;
-            };
-
+    <script src="scripts.js"></script>
+</body>
+</html>
