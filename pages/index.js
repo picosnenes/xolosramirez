@@ -1,41 +1,63 @@
-import Head from 'next/head';
 import Link from 'next/link';
-import styles from '../styles/Home.module.css';
+import { useState } from 'react';
 
 export default function Home() {
-    return (
-        <div className={styles.container}>
-            <Head>
-                <title>Xolos Ramirez - Inicio</title>
-                <meta name="description" content="Inicio del criadero de Xoloitzcuintli" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-            <header className={styles.header}>
+    const handleLogin = async () => {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password }),
+        });
+
+        if (response.ok) {
+            alert('Login successful');
+        } else {
+            alert('Login failed');
+        }
+    };
+
+    return (
+        <div>
+            <header>
                 <h1>Xolos Ramirez</h1>
                 <p>Criadero de Xoloitzcuintli</p>
             </header>
 
-            <nav className={styles.nav}>
-                <Link href="/">Inicio</Link>
-                <Link href="/about">Sobre Nosotros</Link>
-                <Link href="/gallery">Galería</Link>
+            <nav>
+                <Link href="/">Home</Link>
+                <Link href="/about">About Us</Link>
+                <Link href="/gallery">Gallery</Link>
                 <Link href="/blog">Blog</Link>
-                <Link href="/contact">Contacto</Link>
+                <Link href="/contact">Contact</Link>
             </nav>
 
-            <main className={styles.main}>
-                <h2>Inicio</h2>
-                <div className={styles.login}>
-                    <h3>Iniciar Sesión</h3>
-                    <form method="post" action="/api/login">
-                        <input type="text" name="username" placeholder="Usuario" required />
-                        <input type="password" name="password" placeholder="Contraseña" required />
-                        <button type="submit">Iniciar Sesión</button>
-                    </form>
+            <main>
+                <h2>Welcome to Xolos Ramirez</h2>
+                <div className="login">
+                    <h3>Login</h3>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button onClick={handleLogin}>Login</button>
                 </div>
-                <p>Aquí puedes escribir sobre nosotros y lo que hacemos.</p>
+                <p>Welcome to Xolos Ramirez! Discover information about our Xoloitzcuintli dogs and our breeding services.</p>
             </main>
+
+            <footer>
+                <p>&copy; 2024 Xolos Ramirez. All rights reserved.</p>
+            </footer>
         </div>
     );
 }
