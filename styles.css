@@ -1,40 +1,90 @@
-/* Estilo para la sección del Blog y editor */
-#blog {
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
     padding: 20px;
 }
 
-.blog-editor {
-    margin-top: 20px;
+.blog-posts {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-textarea {
-    width: 100%;
-    height: 150px;
-    margin-bottom: 10px;
-}
-
-input[type="file"] {
-    margin-bottom: 10px;
-}
-
-button {
-    display: block;
-    margin-top: 10px;
-}
-
-#blog-posts {
-    margin-top: 20px;
-}
-
-.blog-post {
+article {
+    background: #fff;
     margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin-top: 10px;
+article h2 {
+    margin-top: 0;
 }
+
+.date {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.excerpt {
+    margin: 15px 0;
+}
+
+.read-more {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
 
 
