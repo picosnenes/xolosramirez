@@ -1,9 +1,10 @@
-import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Home() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const router = useRouter();
 
     const handleLogin = async () => {
         const response = await fetch('/api/login', {
@@ -14,6 +15,7 @@ export default function Home() {
 
         if (response.ok) {
             alert('Login successful');
+            router.push('/admin');  // Redirect to the admin page or any protected area
         } else {
             alert('Login failed');
         }
@@ -27,11 +29,11 @@ export default function Home() {
             </header>
 
             <nav>
-                <Link href="/">Home</Link>
-                <Link href="/about">About Us</Link>
-                <Link href="/gallery">Gallery</Link>
-                <Link href="/blog">Blog</Link>
-                <Link href="/contact">Contact</Link>
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/gallery">Gallery</a>
+                <a href="/blog">Blog</a>
+                <a href="/contact">Contact</a>
             </nav>
 
             <main>
@@ -52,7 +54,6 @@ export default function Home() {
                     />
                     <button onClick={handleLogin}>Login</button>
                 </div>
-                <p>Welcome to Xolos Ramirez! Discover information about our Xoloitzcuintli dogs and our breeding services.</p>
             </main>
 
             <footer>
@@ -61,4 +62,3 @@ export default function Home() {
         </div>
     );
 }
-
