@@ -1,48 +1,64 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Admin() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [articles, setArticles] = useState([]);
+    const router = useRouter();
 
-    const handlePublish = async () => {
-        const response = await fetch('/api/posts', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title, content }),
-        });
+    useEffect(() => {
+        const savedArticles = JSON.parse(localStorage.getItem('articles')) || [];
+        setArticles(savedArticles);
+    }, []);
 
-        if (response.ok) {
-            alert('Article published successfully');
+    const handlePublish = () => {
+        if (title && content) {
+            const newArticle = { title, content };
+            const updatedArticles = [...articles, newArticle];
+            setArticles(updatedArticles);
+            localStorage.setItem('articles', JSON.stringify(updatedArticles));
+            setTitle('');
+            setContent('');
         } else {
-            alert('Failed to publish article');
+            alert('Please fill out both fields');
         }
     };
 
+    const handleViewArticle = (article) => {
+        router.push(`/article?title=${encodeURIComponent(article.title)}`);
+    };
+
+    const handleLogout = () => {
+        router.push('/');
+    };
+
     return (
-        <div>
-            <header>
-                <h1>Admin - Xolos Ramirez</h1>
-            </header>
-
-            <main>
-                <h2>Publish a New Article</h2>
-                <input
-                    type="text"
-                    placeholder="Title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-                <textarea
-                    placeholder="Content"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                />
-                <button onClick={handlePublish}>Publish</button>
-            </main>
-
-            <footer>
-                <p>&copy; 2024 Xolos Ramirez. All rights reserved.</p>
-            </footer>
+        <div style={{ padding: '20px' }}>
+            <h1>Admin Page</h1>
+            <input
+                type="text"
+                placeholder="Article Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                style={{ display: 'block', margin: '10px 0' }}
+            />
+            <textarea
+                placeholder="Article Content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                style={{ display: 'block', margin: '10px 0' }}
+            />
+            <button onClick={handlePublish}>Publish</button>
+            <button onClick={handleLogout}>Logout</button>
+            <h2>Published Articles</h2>
+            <ul>
+                {articles.map((article, index) => (
+                    <li key={index} onClick={() => handleViewArticle(article)} style={{ cursor: 'pointer' }}>
+                        {article.title}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }
